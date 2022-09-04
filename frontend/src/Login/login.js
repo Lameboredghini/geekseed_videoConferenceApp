@@ -4,12 +4,15 @@ import {setUsername} from '../store/actions/dashboardActions';
 import SubmitButton from './components/SubmitButton';
 import UsernameInput from './components/username';
 import{useHistory} from 'react-router-dom'
+import {registerNewUser} from '../utils/wssConnection/wssConnection'
 const Login = ({saveUsername}) => {
   const [username,setUsername]=useState('');
   const history = useHistory()
   const handleSubmitButtonPressed =()=>{
-    history.push('/dashboard');
+    
+    registerNewUser(username);
     saveUsername(username);
+    history.push('/dashboard');
   };
   return (
     <div>login
