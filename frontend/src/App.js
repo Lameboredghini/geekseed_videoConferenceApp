@@ -1,12 +1,13 @@
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
 import { useEffect } from 'react';
-
 import { connectWithWebSocket } from './utils/wssConnection/wssConnection';
-import {BrowserRouter as Router,
-Route, Switch} from 'react-router-dom';
-
-import Login from './Login/login';
-import Dashboard from './Dashboard/dashboard';
+import Dashboard from './Dashboard/Dashboard';
+import LoginPage from './LoginPage/LoginPage';
 
 function App () {
   useEffect(() => {
@@ -16,19 +17,13 @@ function App () {
   return (
     <Router>
       <Switch>
-        <Route path ='/dashboard'>
-          <Dashboard/>
-            
-          
-          
-          
+        <Route path='/dashboard'>
+          <Dashboard />
         </Route>
-        <Route path ='/'>
-          <Login/>
+        <Route path='/'>
+          <LoginPage />
         </Route>
       </Switch>
-
-
     </Router>
   );
 }

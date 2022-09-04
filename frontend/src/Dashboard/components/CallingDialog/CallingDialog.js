@@ -1,8 +1,8 @@
 import React from 'react';
-import { MdCallEnd } from 'react-icons/md';
-import { hangUp } from '../../../utils/wssConnection/webRTC/webRTCHandler';
-
 import './CallingDialog.css';
+import { hangUp } from '../../../utils/webRTC/webRTCHandler';
+import { MdCallEnd } from 'react-icons/md';
+
 const styles = {
   buttonContainer: {
     marginTop: '10px',

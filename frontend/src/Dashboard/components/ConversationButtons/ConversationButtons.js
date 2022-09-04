@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera } from 'react-icons/md';
 import ConversationButton from './ConversationButton';
-import { hangUp, switchForScreenSharingStream } from '../../../utils/wssConnection/webRTC/webRTCHandler';
+import { switchForScreenSharingStream, hangUp } from '../../../utils/webRTC/webRTCHandler';
 
 const styles = {
   buttonContainer: {
@@ -25,7 +24,8 @@ const ConversationButtons = (props) => {
     localMicrophoneEnabled,
     setCameraEnabled,
     setMicrophoneEnabled,
-    screenSharingActive
+    screenSharingActive,
+    groupCall
   } = props;
 
   const handleMicButtonPressed = () => {
@@ -43,23 +43,25 @@ const ConversationButtons = (props) => {
   const handleScreenSharingButtonPressed = () => {
     switchForScreenSharingStream();
   };
- const handleHangUpButtonPressed=()=>{
+
+  const handleHangUpButtonPressed = () => {
     hangUp();
- }
+  };
+
   return (
     <div style={styles.buttonContainer}>
       <ConversationButton onClickHandler={handleMicButtonPressed}>
         {localMicrophoneEnabled ? <MdMic style={styles.icon} /> : <MdMicOff style={styles.icon} />}
       </ConversationButton>
-      <ConversationButton onClickHandler={handleHangUpButtonPressed}>
+      {!groupCall && <ConversationButton onClickHandler={handleHangUpButtonPressed}>
         <MdCallEnd style={styles.icon} />
-      </ConversationButton>
+      </ConversationButton>}
       <ConversationButton onClickHandler={handleCameraButtonPressed}>
         {localCameraEnabled ? <MdVideocam style={styles.icon} /> : <MdVideocamOff style={styles.icon} />}
       </ConversationButton>
-      <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
+      {!groupCall && <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
         {screenSharingActive ? <MdCamera style={styles.icon} /> : <MdVideoLabel style={styles.icon} />}
-      </ConversationButton>
+      </ConversationButton>}
     </div>
   );
 };
