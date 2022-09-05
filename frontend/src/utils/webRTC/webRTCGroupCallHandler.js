@@ -1,7 +1,6 @@
 import * as wss from '../wssConnection/wssConnection';
 import store from '../../store/store';
 import { setGroupCallActive, setCallState, callStates, setGroupCallIncomingStreams, clearGroupCallData } from '../../store/actions/callActions';
-import { getTurnServers } from './TURN';
 
 let myPeer;
 let myPeerId;
@@ -12,11 +11,7 @@ export const connectWithMyPeer = () => {
   myPeer = new window.Peer(undefined, {
     path: '/peerjs',
     host: '/',
-    port: '5000',
-    config:{
-      iceServers: [...getTurnServers(), {url:'stun:stun.1und1.de:3478'}],
-      iceTransportPolicy: 'relay'
-    }
+    port: '5000'
   });
 
   myPeer.on('open', (id) => {

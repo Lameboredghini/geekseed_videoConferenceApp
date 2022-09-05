@@ -1,27 +1,11 @@
 const express = require('express');
-const cors = require('cors');
-
 const socket = require('socket.io');
 const { ExpressPeerServer } = require('peer');
 const groupCallHandler = require('./groupCallHandler');
 const { v4: uuidv4 } = require('uuid');
-const twilio = require('twilio');
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 const app = express();
-app.use(cors())
-app.get('/', (req,res) =>{
-  res.send ({api: 'geekseed-api'});
-
-})
-
-app.get('/api/get-turn-credentials',(req, res)=>{
-  const accountSid = 'ACb6628a020b29ea82db0f0ba4f3fb0b10';
-  const authToken ='78bc2e8c51c513e41191d9d646bb4be1';
-  const client = twilio(accountSid,authToken);
-
-  client.tokens.create().then((token) =>res.send({token}));
-})
 
 const server = app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
